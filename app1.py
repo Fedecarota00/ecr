@@ -5,10 +5,12 @@ import time
 from io import BytesIO
 import zipfile
 import os
+import openai
 
 # === CONFIGURATION ===
 HUNTER_API_KEY = "f68566d43791af9b30911bc0fe8a65a89908d4fe"
 PUBLIC_DOMAINS = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]
+openai.api_key = "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"
 
 JOB_KEYWORDS = [
     "Chief Executive Officer", "CEO", "Chief Financial Officer", "CFO", "Chief Operating Officer", "COO",
@@ -51,6 +53,13 @@ def is_public_email(email):
 def job_matches(position):
     if not position:
         return False
+    position = position.lower()
+    position_words = set(position.split())
+    for keyword in JOB_KEYWORDS:
+        keyword_words = set(keyword.lower().split())
+        if keyword_words.issubset(position_words):
+            return True
+    return False
     position = position.lower()
     for keyword in JOB_KEYWORDS:
         if keyword.lower() in position:
@@ -116,20 +125,23 @@ def split_full_name(full_name):
     else:
         return parts[0], " ".join(parts[1:])
 
-def generate_salesflow_data(qualified_leads):
-    records = []
-    for lead in qualified_leads:
-        first_name, last_name = split_full_name(lead["Full Name"])
-        message = f"Hi {first_name}, I came across your profile as {lead['Position']} at {lead['Company']} – I'd love to connect!"
-        records.append({
-            "First Name": first_name,
-            "Last Name": last_name,
-            "LinkedIn URL": lead["LinkedIn"],
-            "Company": lead["Company"],
-            "Job Title": lead["Position"],
-            "Personalized Message": message
-        })
-    return pd.DataFrame(records)
+def generate_ai_message(first_name, position, company):
+    prompt = (
+        f"You're creating a short, professional LinkedIn connection message for a person named {first_name}, "
+        f"who is a {position} at {company}. The sender wants to offer macroeconomic research insights.\n"
+        f"Keep it friendly, specific to the role, and under 250 characters. Avoid generic phrases."
+    )
+    try:
+        response = openai.ChatCompletion.create(
+            model="gpt-4-turbo",
+            messages=[{"role": "system", "content": "You are a LinkedIn outreach assistant."},
+                      {"role": "user", "content": prompt}],
+            temperature=0.9,
+            max_tokens=100
+        )
+        return response['choices'][0]['message']['content'].strip()
+    except Exception as e:
+        return f"Hi {first_name}, I’d love to connect regarding insights relevant to {position} at {company}."
 
 # === STREAMLIT UI ===
 st.set_page_config(page_title="Lead Qualifier", layout="centered")
@@ -144,8 +156,14 @@ st.markdown("""
 </h2>
 """, unsafe_allow_html=True)
 
-# Score threshold slider
 SCORE_THRESHOLD = st.slider("Minimum confidence score", min_value=0, max_value=100, value=50)
+
+# --- Salesflow Message UI ---
+st.markdown("### ✍️ Customize your Salesflow message")
+st.markdown("Insert here the SalesFlow message you would like to send to each lead in the campaign:")
+use_ai = st.checkbox("✨ Use AI to generate personalized messages", value=True)
+default_template = "Hi {first_name}, I came across your profile as {position} at {company} – I'd love to connect!"
+user_template = st.text_area("Message Template (you can use {first_name}, {position}, {company})", value=default_template)
 
 option = st.radio("Choose input method:", ("Manual domain entry", "Upload Excel file"))
 domains = []
@@ -179,7 +197,38 @@ if st.button("🚀 Run Lead Qualification") and domains:
 
     if all_qualified:
         df_qualified = pd.DataFrame(all_qualified)
-        df_salesflow = generate_salesflow_data(all_qualified)
+
+        records = []
+        first_example = None
+        for lead in all_qualified:
+            first_name, last_name = split_full_name(lead["Full Name"])
+            company = lead["Company"]
+            position = lead["Position"]
+
+            message = generate_ai_message(first_name, position, company) if use_ai else user_template.format(
+                first_name=first_name,
+                last_name=last_name,
+                company=company,
+                position=position
+            )
+
+            if first_example is None:
+                first_example = f"**{first_name}** ({position} at {company}):\n\n> {message}"
+
+            records.append({
+                "First Name": first_name,
+                "Last Name": last_name,
+                "LinkedIn URL": lead["LinkedIn"],
+                "Company": company,
+                "Job Title": position,
+                "Personalized Message": message
+            })
+
+        df_salesflow = pd.DataFrame(records)
+
+        if first_example:
+            st.markdown("### 📄 Example AI-Generated Message")
+            st.info(first_example)
 
         buffer_xlsx = BytesIO()
         df_qualified.to_excel(buffer_xlsx, index=False)
@@ -199,3 +248,4 @@ if st.button("🚀 Run Lead Qualification") and domains:
         st.download_button("⬇️ Download All as ZIP", data=zip_buffer.getvalue(), file_name="lead_outputs.zip")
     else:
         st.warning("No qualified leads found. Try a different domain or file.")
+

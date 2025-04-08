@@ -59,69 +59,46 @@ def job_matches(position):
         if keyword_words.issubset(position_words):
             return True
     return False
-    position = position.lower()
-    for keyword in JOB_KEYWORDS:
-        if keyword.lower() in position:
-            return True
-    return False
 
 def get_leads_from_hunter(domain):
-    # Basic version (free plan – max 10 results, no pagination)
     url = f"https://api.hunter.io/v2/domain-search?domain={domain}&api_key={HUNTER_API_KEY}&limit=10"
-    # url += "&emails_type=personal"  # Uncomment if you want only personal emails (may cause 400 on some domains)
-
     response = requests.get(url)
-
     if response.status_code != 200:
         try:
             error_text = response.json().get("errors", [{}])[0].get("details", "Unknown error")
         except:
             error_text = response.text
         return [], f"Error fetching domain {domain}: {response.status_code} – {error_text}"
-
     data = response.json()
     emails = data.get("data", {}).get("emails", [])
     company = data.get("data", {}).get("organization")
-
     for email in emails:
         email["company"] = company
-
     return emails, None
 
     # === Full version with pagination (requires Hunter paid plan) ===
-    #
     # all_emails = []
     # offset = 0
     # limit = 10
-    #
     # while True:
     #     url = f"https://api.hunter.io/v2/domain-search?domain={domain}&api_key={HUNTER_API_KEY}&limit={limit}&offset={offset}"
-    #     # url += "&emails_type=personal"
-    #
     #     response = requests.get(url)
-    #
     #     if response.status_code != 200:
     #         try:
     #             error_text = response.json().get("errors", [{}])[0].get("details", "Unknown error")
     #         except:
     #             error_text = response.text
     #         return [], f"Error fetching domain {domain}: {response.status_code} – {error_text}"
-    #
     #     data = response.json()
     #     emails = data.get("data", {}).get("emails", [])
     #     company = data.get("data", {}).get("organization")
-    #
     #     for email in emails:
     #         email["company"] = company
-    #
     #     all_emails.extend(emails)
-    #
     #     if len(emails) < limit:
     #         break
-    #
     #     offset += limit
     #     time.sleep(1.2)
-    #
     # return all_emails, None
 
 def filter_leads(leads, score_threshold):
@@ -188,10 +165,22 @@ st.markdown("""
 
 SCORE_THRESHOLD = st.slider("Minimum confidence score", min_value=0, max_value=100, value=50)
 
-# --- Salesflow Message UI ---
+option = st.radio("Choose input method:", ("Manual domain entry", "Upload Excel file"))
+domains = []
+
+if option == "Manual domain entry":
+    domain_input = st.text_input("Enter a domain to search leads for (e.g. ing.com):")
+    if domain_input:
+        domains.append(domain_input.strip())
+else:
+    uploaded_file = st.file_uploader("Upload an .xlsx file with domains in column B:", type="xlsx")
+    if uploaded_file:
+        df_uploaded = pd.read_excel(uploaded_file)
+        domains = df_uploaded.iloc[:, 1].dropna().unique().tolist()
+        st.success(f"Loaded {len(domains)} domain(s) from file.")
+
 st.markdown("### ✍️ Customize your Salesflow message")
 
-# === Live AI Preview Box ===
 st.markdown("### 🤖 Try AI Message Generation")
 
 st.markdown("Type in a sample name, title and company to preview an AI-generated message below:")
@@ -201,7 +190,6 @@ test_company = st.text_input("Company", value="ING Bank")
 
 tone = st.radio("Select message tone:", ["Friendly", "Formal", "Data-driven", "Short & Punchy"], horizontal=True)
 
-# Additional customization instruction
 st.markdown("#### 🛠️ Add custom instructions to guide the AI (optional)")
 custom_instruction = st.text_input("What would you like the message to include?", placeholder="e.g. Mention we are macro research providers")
 
@@ -218,15 +206,9 @@ if st.button("✨ Generate AI Message"):
         f"who is a {test_position} at {test_company}. "
         f"{tone_instructions[tone]} "
     )
-
     if custom_instruction:
         preview_prompt += f"{custom_instruction}. "
-
     preview_prompt += "Keep it under 250 characters."
-
-    # Debug: show the full prompt to be sent
-    st.write("🔍 Prompt being sent to OpenAI:")
-    st.code(preview_prompt)
 
     try:
         response = openai.ChatCompletion.create(
@@ -245,24 +227,11 @@ if st.button("✨ Generate AI Message"):
             st.code(preview_prompt, language="text")
     except Exception as e:
         st.error(f"Failed to generate message: {e}")
+
 st.markdown("Insert here the SalesFlow message you would like to send to each lead in the campaign:")
 use_ai = st.checkbox("✨ Use AI to generate personalized messages", value=True)
 default_template = "Hi {first_name}, I came across your profile as {position} at {company} – I'd love to connect!"
 user_template = st.text_area("Message Template (you can use {first_name}, {position}, {company})", value=default_template)
-
-option = st.radio("Choose input method:", ("Manual domain entry", "Upload Excel file"))
-domains = []
-
-if option == "Manual domain entry":
-    domain_input = st.text_input("Enter a domain to search leads for (e.g. ing.com):")
-    if domain_input:
-        domains.append(domain_input.strip())
-else:
-    uploaded_file = st.file_uploader("Upload an .xlsx file with domains in column B:", type="xlsx")
-    if uploaded_file:
-        df_uploaded = pd.read_excel(uploaded_file)
-        domains = df_uploaded.iloc[:, 1].dropna().unique().tolist()
-        st.success(f"Loaded {len(domains)} domain(s) from file.")
 
 st.markdown("""<br><hr style='border:1px solid #cccccc'>""", unsafe_allow_html=True)
 
@@ -289,17 +258,14 @@ if st.button("🚀 Run Lead Qualification") and domains:
             first_name, last_name = split_full_name(lead["Full Name"])
             company = lead["Company"]
             position = lead["Position"]
-
             message = generate_ai_message(first_name, position, company) if use_ai else user_template.format(
                 first_name=first_name,
                 last_name=last_name,
                 company=company,
                 position=position
             )
-
             if first_example is None:
                 first_example = f"**{first_name}** ({position} at {company}):\n\n> {message}"
-
             records.append({
                 "First Name": first_name,
                 "Last Name": last_name,

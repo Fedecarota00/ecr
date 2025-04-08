@@ -1,6 +1,7 @@
-openai
 pillow
 streamlit
 pandas
 openpyxl
 requests
+openai
+openai>=1.3.0

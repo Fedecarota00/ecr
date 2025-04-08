@@ -16,8 +16,10 @@ if os.path.exists(logo_path):
     st.image(logo_path, width=120)
 
 st.markdown("""
-    <div style="background-color: #e8f0fe; padding: 1rem 1.5rem; border-radius: 0.5rem;">
-        <h2 style="margin-bottom: 0.5em;">🔍 ECR Lead Qualification App</h2>
+    <div style="background-color: #1565c0; padding: 0.8rem 1.2rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+        <h2 style="margin: 0; color: white;">🔍 ECR Lead Qualification App</h2>
+    </div>
+    <div style="border-left: 5px solid #2c8cff; padding-left: 1em; background-color: #f0f8ff; border-radius: 5px;">
         <p><strong>This application was developed by Federico Carota</strong> as part of his graduation thesis project at <strong>HU of Applied Sciences</strong>.</p>
         <p>Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.</p>
         <p>It is designed to streamline outreach workflows and increase the relevance of targeted leads.</p>

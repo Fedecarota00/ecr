@@ -7,6 +7,23 @@ import zipfile
 import os
 import openai
 
+# === STREAMLIT CONFIG ===
+st.set_page_config(page_title="Lead Qualifier", layout="centered")
+
+# === LOGO & INTRO (ALWAYS VISIBLE) ===
+logo_path = "ecr_logo_resized.png"
+if os.path.exists(logo_path):
+    st.image(logo_path, width=120)
+
+st.markdown("## 🔍 ECR Lead Qualification App")
+st.info("""
+**This application was developed by Federico Carota** as part of his graduation thesis project at **HU of Applied Sciences**.
+
+Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.
+
+It is designed to streamline outreach workflows and increase the relevance of targeted leads.
+""")
+
 # === CONFIGURATION ===
 HUNTER_API_KEY = st.secrets["HUNTER_API_KEY"]
 PUBLIC_DOMAINS = ["gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]
@@ -149,23 +166,7 @@ def generate_ai_message(first_name, position, company):
         return response['choices'][0]['message']['content'].strip()
     except Exception as e:
         return f"Hi {first_name}, I’d love to connect regarding insights relevant to {position} at {company}."
-
-# === STREAMLIT UI ===
-st.set_page_config(page_title="Lead Qualifier", layout="centered")
-
-logo_path = "ecr_logo_resized.png"
-if os.path.exists(logo_path):
-    st.image(logo_path, width=120)
-
-st.markdown("## 🔍 ECR Lead Qualification App")
-st.info("""
-**This application was developed by Federico Carota** as part of his graduation thesis project at **HU of Applied Sciences**.
-
-Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.
-
-It is designed to streamline outreach workflows and increase the relevance of targeted leads.
-""")
-
+        
 # === LANGUAGE SELECTION ===
 language = st.selectbox("Choose your language:", ["English", "Italian", "Dutch", "German", "French", "Spanish"])
 

@@ -157,20 +157,14 @@ logo_path = "ecr_logo_resized.png"
 if os.path.exists(logo_path):
     st.image(logo_path, width=120)
 
-st.markdown("""
-<h2 style='text-align: center; color: #ffffff; background-color: #001F54; padding: 15px; border-radius: 10px;'>
-    🔍 ECR Lead Qualification App
-</h2>
-<div style='background-color:#f0f4ff;padding:20px 25px;border-left:6px solid #003366;border-radius:6px;margin:20px 0 30px 0;'>
-  <p style='font-size:16px;line-height:1.5;color:#333333;font-family:"Times New Roman",serif;font-weight:bold;'>
-    This application was developed by Federico Carota as part of his graduation thesis project at HU of Applied Sciences, with the objective of supporting lead qualification processes at <b>ECR Research</b>.
-    <br><br>
-    Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.
-    <br><br>
-    It is designed to streamline outreach workflows and increase the relevance of targeted leads.
-  </p>
-</div>
-""", unsafe_allow_html=True)
+st.markdown("## 🔍 ECR Lead Qualification App")
+st.info("""
+**This application was developed by Federico Carota** as part of his graduation thesis project at **HU of Applied Sciences**.
+
+Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.
+
+It is designed to streamline outreach workflows and increase the relevance of targeted leads.
+""")
 
 # === LANGUAGE SELECTION ===
 language = st.selectbox("Choose your language:", ["English", "Italian", "Dutch", "German", "French", "Spanish"])

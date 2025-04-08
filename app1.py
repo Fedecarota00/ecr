@@ -161,18 +161,125 @@ st.markdown("""
 <h2 style='text-align: center; color: #ffffff; background-color: #001F54; padding: 15px; border-radius: 10px;'>
     🔍 ECR Lead Qualification App
 </h2>
+<div style='background-color:#f0f4ff;padding:20px 25px;border-left:6px solid #003366;border-radius:6px;margin:20px 0 30px 0;'>
+  <p style='font-size:16px;line-height:1.5;color:#333333;font-family:"Times New Roman",serif;font-weight:bold;'>
+    This application was developed by Federico Carota as part of his graduation thesis project at HU of Applied Sciences, with the objective of supporting lead qualification processes at <b>ECR Research</b>.
+    <br><br>
+    Combining verified email scoring, job title matching, and LinkedIn integration, the tool automates the identification of key financial decision-makers using smart filtering logic.
+    <br><br>
+    It is designed to streamline outreach workflows and increase the relevance of targeted leads.
+  </p>
+</div>
 """, unsafe_allow_html=True)
+
+# === LANGUAGE SELECTION ===
+language = st.selectbox("Choose your language:", ["English", "Italian", "Dutch", "German", "French", "Spanish"])
+
+# === TRANSLATION TEXTS ===
+TEXTS = {
+    "English": {
+        "input_method": "Choose input method:",
+        "manual_entry": "Manual domain entry",
+        "upload_file": "Upload Excel file",
+        "enter_domain": "Enter a domain to search leads for:",
+        "run_button": "🚀 Run Lead Qualification",
+        "uploaded_success": "Loaded {n} domain(s) from file.",
+        "processing": "Working through the domains and filtering qualified leads...",
+        "qualified_count": "✅ Qualified leads from {domain}: {count}",
+        "preview_header": "📋 Preview of Qualified Leads",
+        "download_section": "🎉 Export Your Results:",
+        "no_results": "No qualified leads found. Try a different domain or file.",
+        "upload_instruction": "Upload an .xlsx file with domains in column B:"
+    },
+    "Italian": {
+        "input_method": "Scegli il metodo di inserimento:",
+        "manual_entry": "Inserimento manuale del dominio",
+        "upload_file": "Carica file Excel",
+        "enter_domain": "Inserisci un dominio per cercare contatti:",
+        "run_button": "🚀 Avvia Qualificazione Contatti",
+        "uploaded_success": "Caricati {n} domini dal file.",
+        "processing": "Elaborazione domini e filtraggio contatti qualificati...",
+        "qualified_count": "✅ Contatti qualificati da {domain}: {count}",
+        "preview_header": "📋 Anteprima Contatti Qualificati",
+        "download_section": "🎉 Esporta i tuoi risultati:",
+        "no_results": "Nessun contatto qualificato trovato. Prova con un altro dominio o file.",
+        "upload_instruction": "Carica un file .xlsx con domini nella colonna B:"
+    },
+    "Dutch": {
+        "input_method": "Kies invoermethode:",
+        "manual_entry": "Handmatige domeininvoer",
+        "upload_file": "Upload Excel-bestand",
+        "enter_domain": "Voer een domein in om leads te zoeken:",
+        "run_button": "🚀 Start Leadkwalificatie",
+        "uploaded_success": "{n} domeinen geladen uit bestand.",
+        "processing": "Bezig met verwerken van domeinen en filteren van gekwalificeerde leads...",
+        "qualified_count": "✅ Gekwalificeerde leads van {domain}: {count}",
+        "preview_header": "📋 Voorbeeld van Gekwalificeerde Leads",
+        "download_section": "🎉 Exporteer je resultaten:",
+        "no_results": "Geen gekwalificeerde leads gevonden. Probeer een ander domein of bestand.",
+        "upload_instruction": "Upload een .xlsx-bestand met domeinen in kolom B:"
+    },
+    "German": {
+        "input_method": "Wählen Sie die Eingabemethode:",
+        "manual_entry": "Manuelle Domain-Eingabe",
+        "upload_file": "Excel-Datei hochladen",
+        "enter_domain": "Geben Sie eine Domain zur Lead-Suche ein:",
+        "run_button": "🚀 Lead-Qualifizierung starten",
+        "uploaded_success": "{n} Domains aus Datei geladen.",
+        "processing": "Verarbeite Domains und filtere qualifizierte Leads...",
+        "qualified_count": "✅ Qualifizierte Leads von {domain}: {count}",
+        "preview_header": "📋 Vorschau Qualifizierter Leads",
+        "download_section": "🎉 Ergebnisse exportieren:",
+        "no_results": "Keine qualifizierten Leads gefunden. Versuchen Sie es mit einer anderen Domain oder Datei.",
+        "upload_instruction": "Laden Sie eine .xlsx-Datei mit Domains in Spalte B hoch:"
+    },
+    "French": {
+        "input_method": "Choisissez la méthode de saisie :",
+        "manual_entry": "Saisie manuelle du domaine",
+        "upload_file": "Télécharger un fichier Excel",
+        "enter_domain": "Entrez un domaine pour rechercher des contacts :",
+        "run_button": "🚀 Lancer la qualification des leads",
+        "uploaded_success": "{n} domaines chargés depuis le fichier.",
+        "processing": "Traitement des domaines et filtrage des leads qualifiés...",
+        "qualified_count": "✅ Leads qualifiés pour {domain} : {count}",
+        "preview_header": "📋 Aperçu des leads qualifiés",
+        "download_section": "🎉 Exportez vos résultats :",
+        "no_results": "Aucun lead qualifié trouvé. Essayez un autre domaine ou fichier.",
+        "upload_instruction": "Téléversez un fichier .xlsx avec les domaines dans la colonne B :"
+    },
+    "Spanish": {
+        "input_method": "Elige el método de entrada:",
+        "manual_entry": "Entrada manual del dominio",
+        "upload_file": "Subir archivo Excel",
+        "enter_domain": "Introduce un dominio para buscar contactos:",
+        "run_button": "🚀 Ejecutar Calificación de Leads",
+        "uploaded_success": "{n} dominios cargados desde el archivo.",
+        "processing": "Procesando dominios y filtrando leads calificados...",
+        "qualified_count": "✅ Leads calificados de {domain}: {count}",
+        "preview_header": "📋 Vista previa de leads calificados",
+        "download_section": "🎉 Exporta tus resultados:",
+        "no_results": "No se encontraron leads calificados. Prueba con otro dominio o archivo.",
+        "upload_instruction": "Sube un archivo .xlsx con dominios en la columna B:"
+    }
+}
 
 SCORE_THRESHOLD = st.slider("Minimum confidence score", min_value=0, max_value=100, value=50)
 
-option = st.radio("Choose input method:", ("Manual domain entry", "Upload Excel file"))
+TEXT = TEXTS[language]
+
+option = st.radio(TEXT['input_method'], (TEXT['manual_entry'], TEXT['upload_file']))
+
+st.markdown("""<hr style='border:1px solid #cccccc'>""", unsafe_allow_html=True)
+
 domains = []
 
-if option == "Manual domain entry":
-    domain_input = st.text_input("Enter a domain to search leads for (e.g. ing.com):")
+if option == TEXT['manual_entry']:
+    st.markdown("**Enter a domain to search leads for:**")
+    domain_input = st.text_input("e.g. ing.com")
     if domain_input:
         domains.append(domain_input.strip())
-else:
+
+elif option == TEXT['upload_file']:
     uploaded_file = st.file_uploader("Upload an .xlsx file with domains in column B:", type="xlsx")
     if uploaded_file:
         df_uploaded = pd.read_excel(uploaded_file)

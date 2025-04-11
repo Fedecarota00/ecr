@@ -242,7 +242,7 @@ if st.button(TEXT["run_button"]) and domains:
         st.download_button(TEXT["download_xlsx"], data=buffer_xlsx.getvalue(), file_name="qualified_leads.xlsx")
         st.download_button(TEXT["download_csv"], data=buffer_csv.getvalue(), file_name="salesflow_leads.csv")
         st.download_button(TEXT["download_zip"], data=zip_buffer.getvalue(), file_name="lead_outputs.zip")
-        st.download_button(TEXT["Download SugarCRM CSV"], data=buffer_sugar_csv.getvalue(), file_name="sugarcrm_leads.csv")
+        st.download_button(TEXT["download_sugarcrm"], data=buffer_sugar_csv.getvalue(), file_name="sugarcrm_leads.csv")
     else:
         st.warning(TEXT["no_results"])
 

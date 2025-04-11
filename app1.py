@@ -175,7 +175,7 @@ default_template = preview_message.replace(first_name, "{first_name}").replace(p
 final_template = st.text_area("Custom message template", value=default_template)
 
 # === RUN QUALIFICATION ===
-st.markdown(TEXT["### Step 4 – Run Lead Qualification")]
+st.markdown(TEXT["### Step 4 – Run Lead Qualification"])
 if st.button(TEXT["run_button"]) and domains:
     all_qualified = []
     with st.spinner(TEXT['processing']):

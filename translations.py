@@ -27,7 +27,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Download Qualified Leads (.xlsx)",
         "download_csv": "⬇️ Download Salesflow CSV",
         "download_zip": "⬇️ Download All as ZIP",
-        "download_sugarcrm": "⬇️ Download SugarCRM CSV"
+        "download_sugarcrm": "⬇️ Download SugarCRM CSV",
+        "step_1": "### Step 1 – Upload or Enter Company Domains",
+        "step_2": "### Step 2 – Preview a Sample Message",
+        "step_3": "### Step 3 – Customize the Message Template",
+        "step_4": "### Step 4 – Run Lead Qualification"
     },
     "Italian": {
         "input_method": "Scegli il metodo di inserimento:",
@@ -57,7 +61,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Scarica Contatti Qualificati (.xlsx)",
         "download_csv": "⬇️ Scarica CSV per Salesflow",
         "download_zip": "⬇️ Scarica Tutto in ZIP",
-        "download_sugarcrm": "⬇️ Scarica CSV per SugarCRM"
+        "download_sugarcrm": "⬇️ Scarica CSV per SugarCRM",
+        "step_1": "### Passaggio 1 – Carica o Inserisci i Domini Aziendali",
+        "step_2": "### Passaggio 2 – Anteprima di un Messaggio AI",
+        "step_3": "### Passaggio 3 – Personalizza il Modello di Messaggio",
+        "step_4": "### Passaggio 4 – Avvia la Qualificazione dei Lead"
     },
     "Dutch": {
         "input_method": "Kies invoermethode:",
@@ -87,7 +95,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Download Gekwalificeerde Leads (.xlsx)",
         "download_csv": "⬇️ Download Salesflow CSV",
         "download_zip": "⬇️ Download Alles als ZIP",
-        "download_sugarcrm": "⬇️ Download SugarCRM CSV"
+        "download_sugarcrm": "⬇️ Download SugarCRM CSV",
+        "step_1": "### Stap 1 – Upload of Voer Domeinen In",
+        "step_2": "### Stap 2 – Voorbeeld van een AI-bericht",
+        "step_3": "### Stap 3 – Pas het Berichtensjabloon aan",
+        "step_4": "### Stap 4 – Start Leadkwalificatie"
     },
     "German": {
         "input_method": "Wählen Sie die Eingabemethode:",
@@ -117,7 +129,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Qualifizierte Leads herunterladen (.xlsx)",
         "download_csv": "⬇️ Salesflow CSV herunterladen",
         "download_zip": "⬇️ Alles als ZIP herunterladen",
-        "download_sugarcrm": "⬇️ SugarCRM CSV herunterladen"
+        "download_sugarcrm": "⬇️ SugarCRM CSV herunterladen",
+        "step_1": "### Schritt 1 – Domainnamen hochladen oder eingeben",
+        "step_2": "### Schritt 2 – Vorschau einer AI-Nachricht",
+        "step_3": "### Schritt 3 – Nachrichtenvorlage anpassen",
+        "step_4": "### Schritt 4 – Lead-Qualifizierung starten"
     },
     "French": {
         "input_method": "Choisissez la méthode de saisie :",
@@ -147,7 +163,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Télécharger les leads qualifiés (.xlsx)",
         "download_csv": "⬇️ Télécharger le CSV pour Salesflow",
         "download_zip": "⬇️ Télécharger tout au format ZIP",
-        "download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM"
+        "download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM""download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM",
+        "step_1": "### Étape 1 – Importez ou saisissez les domaines d’entreprise",
+        "step_2": "### Étape 2 – Prévisualiser un message IA",
+        "step_3": "### Étape 3 – Personnalisez le modèle de message",
+        "step_4": "### Étape 4 – Lancer la qualification des leads"
     },
     "Spanish": {
         "input_method": "Elige el método de entrada:",
@@ -177,6 +197,11 @@ TEXTS = {
         "download_xlsx": "⬇️ Descargar Leads Calificados (.xlsx)",
         "download_csv": "⬇️ Descargar CSV para Salesflow",
         "download_zip": "⬇️ Descargar todo en ZIP",
-        "download_sugarcrm": "⬇️ Descargar CSV para SugarCRM"
+        "download_sugarcrm": "⬇️ Descargar CSV para SugarCRM",
+        "download_sugarcrm": "⬇️ Descargar CSV para SugarCRM",
+        "step_1": "### Paso 1 – Sube o introduce los dominios de empresa",
+        "step_2": "### Paso 2 – Vista previa de un mensaje generado por IA",
+        "step_3": "### Paso 3 – Personaliza la plantilla del mensaje",
+        "step_4": "### Paso 4 – Ejecutar la calificación de leads"
     }
 }

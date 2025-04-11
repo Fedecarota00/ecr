@@ -15,6 +15,7 @@ st.set_page_config(page_title=" FC Lead Qualificator", layout="wide")
 
 # === LANGUAGE SELECTION ===
 st.sidebar.image("ecr_logo_resized.png", width=120)
+st.sidebar.image("ecr_logo_resized1.png", width=120)
 language = st.sidebar.selectbox("Choose your language:", list(TEXTS.keys()))
 TEXT = TEXTS[language]
 

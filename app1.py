@@ -11,7 +11,7 @@ from translations import TEXTS
 from jobpositions import JOB_KEYWORDS
 
 # === STREAMLIT CONFIG ===
-st.set_page_config(page_title=" FC Lead Qualificator", layout="wide")
+st.set_page_config(page_title=" FC Lead Qualifier", layout="wide")
 
 # === LANGUAGE SELECTION ===
 st.sidebar.image("ecr_logo_resized.png", width=120)

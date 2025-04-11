@@ -212,22 +212,40 @@ if st.button(TEXT["run_button"]) and domains:
 
         df_salesflow = pd.DataFrame(records)
 
+        # === PREPARE EXPORT FILES ===
         buffer_xlsx = BytesIO()
         df_qualified.to_excel(buffer_xlsx, index=False)
+
         buffer_csv = BytesIO()
         df_salesflow.to_csv(buffer_csv, index=False, encoding="utf-8-sig")
+
         zip_buffer = BytesIO()
         with zipfile.ZipFile(zip_buffer, "w") as zipf:
             zipf.writestr("qualified_leads.xlsx", buffer_xlsx.getvalue())
             zipf.writestr("salesflow_leads.csv", buffer_csv.getvalue())
 
+        # === PREPARE SUGARCRM CSV EXPORT ===
+        df_sugarcrm = df_salesflow.rename(columns={
+            "First Name": "first_name",
+            "Last Name": "last_name",
+            "Job Title": "title",
+            "Company": "account_name",
+            "LinkedIn URL": "linkedin_c",  # assumes this custom field exists
+            "Personalized Message": "description"
+        })
+        buffer_sugar_csv = BytesIO()
+        df_sugarcrm.to_csv(buffer_sugar_csv, index=False, encoding="utf-8-sig")
+
+        # === EXPORT UI ===
         st.markdown("### Step 5 – Export Your Results")
         st.dataframe(df_qualified, use_container_width=True)
         st.download_button(TEXT["download_xlsx"], data=buffer_xlsx.getvalue(), file_name="qualified_leads.xlsx")
         st.download_button(TEXT["download_csv"], data=buffer_csv.getvalue(), file_name="salesflow_leads.csv")
         st.download_button(TEXT["download_zip"], data=zip_buffer.getvalue(), file_name="lead_outputs.zip")
+        st.download_button("Download SugarCRM CSV", data=buffer_sugar_csv.getvalue(), file_name="sugarcrm_leads.csv")
     else:
         st.warning(TEXT["no_results"])
+
 
 
 

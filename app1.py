@@ -20,7 +20,7 @@ TEXT = TEXTS[language]
 
 # === TITLE & INTRO SECTION ===
 st.markdown(f"""
-    <div style="background-color: #003366; padding: 1rem 1.5rem; border-radius: 0.5rem; margin-bottom: 1rem;">
+    <div style="background-color: #0D18A1; padding: 1rem 1.5rem; border-radius: 0.5rem; margin-bottom: 1rem;">
         <h2 style="margin: 0; color: white;">FC Lead Qualificator</h2>
     </div>
 """, unsafe_allow_html=True)

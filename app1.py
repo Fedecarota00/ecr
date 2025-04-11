@@ -126,7 +126,7 @@ def generate_ai_message(first_name, position, company, tone=None, custom_instruc
         return f"Hi {first_name}, I’d love to connect regarding insights relevant to {position} at {company}."
 
 # === PAGE LAYOUT ===
-st.markdown("### Step 1 – Upload or Enter Company Domains")
+st.markdown(TEXT["### Step 1 – Upload or Enter Company Domains"])
 option = st.radio(TEXT['input_method'], (TEXT['manual_entry'], TEXT['upload_file']))
 
 domains = []
@@ -146,7 +146,7 @@ elif option == TEXT['upload_file']:
 if "ai_template" not in st.session_state:
     st.session_state.ai_template = ""
 
-st.markdown("### Step 2 – Preview a Sample Message")
+st.markdown(TEXT["### Step 2 – Preview a Sample Message"])
 col1, col2 = st.columns(2)
 with col1:
     test_first_name = st.text_input(TEXT["first_name"], value="Alex")
@@ -163,7 +163,7 @@ if st.button(TEXT["generate_message"]):
     st.info(ai_msg)
 
 # === EDIT MESSAGE TEMPLATE ===
-st.markdown("### Step 3 – Customize the Message Template")
+st.markdown(TEXT["### Step 3 – Customize the Message Template"])
 st.markdown("You can edit the message below. Use placeholders like `{first_name}`, `{position}`, `{company}` to personalize.")
 
 first_name = test_first_name
@@ -175,7 +175,7 @@ default_template = preview_message.replace(first_name, "{first_name}").replace(p
 final_template = st.text_area("Custom message template", value=default_template)
 
 # === RUN QUALIFICATION ===
-st.markdown("### Step 4 – Run Lead Qualification")
+st.markdown(TEXT["### Step 4 – Run Lead Qualification")]
 if st.button(TEXT["run_button"]) and domains:
     all_qualified = []
     with st.spinner(TEXT['processing']):

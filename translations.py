@@ -28,7 +28,7 @@ TEXTS = {
         "download_csv": "⬇️ Download Salesflow CSV",
         "download_zip": "⬇️ Download All as ZIP",
         "download_sugarcrm": "⬇️ Download SugarCRM CSV",
-        "step_1": "### Step 1 – Upload or Enter Company Domains",
+        "### Step 1 – Upload or Enter Company Domains": "### Step 1 – Upload or Enter Company Domains",
         "step_2": "### Step 2 – Preview a Sample Message",
         "step_3": "### Step 3 – Customize the Message Template",
         "step_4": "### Step 4 – Run Lead Qualification"
@@ -163,7 +163,7 @@ TEXTS = {
         "download_xlsx": "⬇️ Télécharger les leads qualifiés (.xlsx)",
         "download_csv": "⬇️ Télécharger le CSV pour Salesflow",
         "download_zip": "⬇️ Télécharger tout au format ZIP",
-        "download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM""download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM",
+        "download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM",
         "step_1": "### Étape 1 – Importez ou saisissez les domaines d’entreprise",
         "step_2": "### Étape 2 – Prévisualiser un message IA",
         "step_3": "### Étape 3 – Personnalisez le modèle de message",

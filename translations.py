@@ -26,7 +26,8 @@ TEXTS = {
         "example_message": "### 📄 Example AI-Generated Message",
         "download_xlsx": "⬇️ Download Qualified Leads (.xlsx)",
         "download_csv": "⬇️ Download Salesflow CSV",
-        "download_zip": "⬇️ Download All as ZIP"
+        "download_zip": "⬇️ Download All as ZIP",
+        "download_sugarcrm": "⬇️ Download SugarCRM CSV"
     },
     "Italian": {
         "input_method": "Scegli il metodo di inserimento:",
@@ -55,7 +56,8 @@ TEXTS = {
         "example_message": "### 📄 Esempio di Messaggio Generato con l'AI",
         "download_xlsx": "⬇️ Scarica Contatti Qualificati (.xlsx)",
         "download_csv": "⬇️ Scarica CSV per Salesflow",
-        "download_zip": "⬇️ Scarica Tutto in ZIP"
+        "download_zip": "⬇️ Scarica Tutto in ZIP",
+        "download_sugarcrm": "⬇️ Scarica CSV per SugarCRM"
     },
     "Dutch": {
         "input_method": "Kies invoermethode:",
@@ -84,7 +86,8 @@ TEXTS = {
         "example_message": "### 📄 Voorbeeld van AI-bericht",
         "download_xlsx": "⬇️ Download Gekwalificeerde Leads (.xlsx)",
         "download_csv": "⬇️ Download Salesflow CSV",
-        "download_zip": "⬇️ Download Alles als ZIP"
+        "download_zip": "⬇️ Download Alles als ZIP",
+        "download_sugarcrm": "⬇️ Download SugarCRM CSV"
     },
     "German": {
         "input_method": "Wählen Sie die Eingabemethode:",
@@ -113,7 +116,8 @@ TEXTS = {
         "example_message": "### 📄 Beispiel einer AI-generierten Nachricht",
         "download_xlsx": "⬇️ Qualifizierte Leads herunterladen (.xlsx)",
         "download_csv": "⬇️ Salesflow CSV herunterladen",
-        "download_zip": "⬇️ Alles als ZIP herunterladen"
+        "download_zip": "⬇️ Alles als ZIP herunterladen",
+        "download_sugarcrm": "⬇️ SugarCRM CSV herunterladen"
     },
     "French": {
         "input_method": "Choisissez la méthode de saisie :",
@@ -142,7 +146,8 @@ TEXTS = {
         "example_message": "### 📄 Exemple de message généré par l'IA",
         "download_xlsx": "⬇️ Télécharger les leads qualifiés (.xlsx)",
         "download_csv": "⬇️ Télécharger le CSV pour Salesflow",
-        "download_zip": "⬇️ Télécharger tout au format ZIP"
+        "download_zip": "⬇️ Télécharger tout au format ZIP",
+        "download_sugarcrm": "⬇️ Télécharger le CSV pour SugarCRM"
     },
     "Spanish": {
         "input_method": "Elige el método de entrada:",
@@ -171,6 +176,7 @@ TEXTS = {
         "example_message": "### 📄 Ejemplo de mensaje generado por IA",
         "download_xlsx": "⬇️ Descargar Leads Calificados (.xlsx)",
         "download_csv": "⬇️ Descargar CSV para Salesflow",
-        "download_zip": "⬇️ Descargar todo en ZIP"
+        "download_zip": "⬇️ Descargar todo en ZIP",
+        "download_sugarcrm": "⬇️ Descargar CSV para SugarCRM"
     }
 }

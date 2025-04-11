@@ -28,7 +28,7 @@ TEXTS = {
         "download_csv": "⬇️ Download Salesflow CSV",
         "download_zip": "⬇️ Download All as ZIP",
         "download_sugarcrm": "⬇️ Download SugarCRM CSV",
-        "### Step 1 – Upload or Enter Company Domains": "### Step 1 – Upload or Enter Company Domains",
+        "step_1": "### Step 1 – Upload or Enter Company Domains",
         "step_2": "### Step 2 – Preview a Sample Message",
         "step_3": "### Step 3 – Customize the Message Template",
         "step_4": "### Step 4 – Run Lead Qualification"

@@ -149,9 +149,9 @@ if "ai_template" not in st.session_state:
 st.markdown(TEXT["step_2"])
 col1, col2 = st.columns(2)
 with col1:
-    test_first_name = st.text_input(TEXT["first_name"], value="Alex")
-    test_position = st.text_input(TEXT["job_title"], value="Chief Financial Officer")
-    test_company = st.text_input(TEXT["company"], value="ING Bank")
+    test_first_name = st.text_input(TEXT["first_name"], value="{first_name}")
+    test_position = st.text_input(TEXT["job_title"], value="{position}")
+    test_company = st.text_input(TEXT["company"], value="{company}")
 with col2:
     tone = st.radio(TEXT["message_tone"], ["Friendly", "Formal", "Data-driven", "Short & Punchy"])
     custom_instruction = st.text_input(TEXT["custom_instruction"], placeholder="e.g. Mention we are macro research providers")
